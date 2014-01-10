@@ -21,7 +21,7 @@ k = eSSP.eSSP('/dev/ttyACM0')
 
 print k.sync()
 print k.enable_higher_protocol()
-print k.set_inhibits(k.easy_inhibit([1, 0, 1]), '0x00')
+print k.set_inhibits('0x3E', '0x00')
 print k.enable()
 var = 1
 i = 0

@@ -27,6 +27,7 @@ class eSSP(object):
 		# highchannels: Channel 9 to 16
 		# takes a bitmask
 		# For more ease: use easy_inhibit() as helper
+		logging.debug("Low: " + lowchannels + " High:" + highchannels)
 		result = self.send([self.getseq(), '0x3', '0x2', lowchannels, highchannels])
 		return result
 
