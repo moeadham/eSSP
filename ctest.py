@@ -32,7 +32,7 @@ while var == 1:
 	if len(poll) > 1:
 		if len(poll[1]) == 2:
 			if poll[1][0] == '0xef':
-				if poll[1][1] == 1 or poll[1][1] == 2 or poll[1][1] == 3 or poll[1][1] == 4 or poll[1][1] == 5:
+				if False:
 					while i < 10:
 						k.hold()
 						print "Hold " + str(i)
