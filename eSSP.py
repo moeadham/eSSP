@@ -297,6 +297,28 @@ class eSSP(object):
 		result = self.send([self.getseq(), '0x1', '0x19'])
 		return result
 	
+	
+	def set_generator(self):
+		# In this example we are sending the prime number 982451653. This = 3A8F05C5 hex
+		result = self.send([self.getseq(), '0x09', '0x4A','0xC5','0x05','0x8F','0x3A','0x0','0x0','0x0','0x0',])
+		return result
+
+	def set_modulus(self):
+		# In this example we are sending the prime number 1287821. This = 13A68D hex
+		result = self.send([self.getseq(), '0x09', '0x4B','0x8D','0xA6','0x13','0x00','0x00','0x00','0x00','0x00',])
+		return result
+	
+	def request_key_exchange(self):
+		# An example of Host intermediate key of 7554354432121 = 6DEE29CC879 hex
+		result = self.send([self.getseq(), '0x09', '0x4C','0x79','0xC8','0x9C','0xE2','0xDE','0x06','0x00','0x00',])
+		
+		# This result has 64 bits of our AES key
+		# The lower bits are by default   01 23 45 67 01 23 45 67
+		# Example hiher bits response is  c5 83 13 00 00 00 00 00
+		
+		
+		return result
+	
 # End Of Definition Of SSP_CMD_* Commands
 
 	def getseq(self):	
@@ -341,7 +363,6 @@ class eSSP(object):
 
 	def send(self, command, no_process = 0):
 		crc = self.crc(command)
-		
 		prepedstring = '7F'
 
 		command = command + crc
@@ -355,7 +376,6 @@ class eSSP(object):
 		logging.debug("OUT: 0x" + ' 0x'.join([prepedstring[x:x+2] for x in xrange(0,len(prepedstring),2)]))
 		
 		prepedstring = prepedstring.decode('hex')
-		
 		self.__ser.write(prepedstring)
 
 		if no_process == 1:
